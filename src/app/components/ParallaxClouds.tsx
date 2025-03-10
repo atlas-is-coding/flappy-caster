@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 
 type CloudProps = {
   id: number
@@ -51,7 +51,7 @@ const Cloud = ({
       if (!startTimeRef.current) startTimeRef.current = timestamp
       const elapsed = timestamp - startTimeRef.current
       
-      let newPosition = initialLeft - (elapsed * speed / 1000)
+      const newPosition = initialLeft - (elapsed * speed / 1000)
       
       if (newPosition < -10) {
         setIsVisible(false)
@@ -200,7 +200,7 @@ const ParallaxClouds = () => {
     }
   }
   
-  const generateInitialPositions = () => {
+  const generateInitialPositions = useCallback(() => {
     const desktopClouds = [
       { 
         id: 1,
@@ -208,7 +208,7 @@ const ParallaxClouds = () => {
         width: 120, 
         height: 60, 
         speed: 5, 
-        initialLeft: 120,
+        initialLeft: 5,
         top: 5, 
         opacity: 0.75,
         zIndex: 1
@@ -219,7 +219,7 @@ const ParallaxClouds = () => {
         width: 100, 
         height: 50, 
         speed: 7, 
-        initialLeft: 115,
+        initialLeft: 30,
         top: 15, 
         opacity: 0.75,
         zIndex: 1
@@ -230,7 +230,7 @@ const ParallaxClouds = () => {
         width: 150, 
         height: 75, 
         speed: 10, 
-        initialLeft: 100,
+        initialLeft: 55,
         top: 35, 
         opacity: 0.5,
         zIndex: 2
@@ -241,7 +241,7 @@ const ParallaxClouds = () => {
         width: 130, 
         height: 65, 
         speed: 12, 
-        initialLeft: 95,
+        initialLeft: 80,
         top: 50, 
         opacity: 0.5,
         zIndex: 2
@@ -252,7 +252,7 @@ const ParallaxClouds = () => {
         width: 200, 
         height: 100, 
         speed: 15, 
-        initialLeft: 125,
+        initialLeft: 20,
         top: 70, 
         opacity: 0.5,
         zIndex: 3
@@ -263,7 +263,7 @@ const ParallaxClouds = () => {
         width: 180, 
         height: 90, 
         speed: 18, 
-        initialLeft: 103,
+        initialLeft: 70,
         top: 80, 
         opacity: 0.5,
         zIndex: 3
@@ -277,29 +277,29 @@ const ParallaxClouds = () => {
         width: 100, 
         height: 50, 
         speed: 5, 
-        initialLeft: 90,
+        initialLeft: 10,
         top: 10, 
         opacity: 0.75,
         zIndex: 1
       },
       { 
-        id: 2,
+        id: 3,
         src: '/images/cloud-small-50.png', 
         width: 120, 
         height: 60, 
         speed: 8, 
-        initialLeft: 100,
+        initialLeft: 60,
         top: 40, 
         opacity: 0.5,
         zIndex: 2
       },
       { 
-        id: 3,
+        id: 5,
         src: '/images/cloud-big-50.png', 
         width: 150, 
         height: 75, 
         speed: 12, 
-        initialLeft: 115,
+        initialLeft: 30,
         top: 75, 
         opacity: 0.5,
         zIndex: 3
@@ -316,7 +316,7 @@ const ParallaxClouds = () => {
         zIndex: 3
       },
       { 
-        id: 5,
+        id: 6,
         src: '/images/cloud-big-50.png', 
         width: 150, 
         height: 75, 
@@ -327,7 +327,7 @@ const ParallaxClouds = () => {
         zIndex: 3
       },
       { 
-        id: 6,
+        id: 2,
         src: '/images/cloud-small-50.png', 
         width: 150, 
         height: 75, 
@@ -354,7 +354,7 @@ const ParallaxClouds = () => {
     setCloudPositions(initialPositions);
     
     return cloudConfigs;
-  }
+  }, [isMobile]);
   
   const cloudsRef = useRef<ReturnType<typeof generateInitialPositions> | null>(null);
   
@@ -362,7 +362,7 @@ const ParallaxClouds = () => {
     if (isClient) {
       cloudsRef.current = generateInitialPositions();
     }
-  }, [isClient, isMobile]);
+  }, [isClient, isMobile, generateInitialPositions]);
 
   if (!isClient || !cloudsRef.current) {
     return <div className="fixed inset-0 overflow-hidden pointer-events-none"></div>;
