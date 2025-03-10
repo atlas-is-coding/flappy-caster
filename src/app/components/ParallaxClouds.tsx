@@ -182,20 +182,25 @@ const ParallaxClouds = () => {
       }))
     } else {
       let attempts = 0;
-      let adjustedPosition = { ...newPosition };
+      const initialAdjustedPosition = { ...newPosition };
+      let currentPosition = initialAdjustedPosition;
       
-      while (attempts < 5 && checkOverlap(adjustedPosition, id)) {
+      while (attempts < 5 && checkOverlap(currentPosition, id)) {
+        const newAdjustedPosition = { ...currentPosition };
+        
         if ((id + attempts) % 2 === 0) {
-          adjustedPosition.top = Math.max(5, adjustedPosition.top - (5 + attempts * 2));
+          newAdjustedPosition.top = Math.max(5, newAdjustedPosition.top - (5 + attempts * 2));
         } else {
-          adjustedPosition.top = Math.min(90, adjustedPosition.top + (5 + attempts * 2));
+          newAdjustedPosition.top = Math.min(90, newAdjustedPosition.top + (5 + attempts * 2));
         }
+        
+        currentPosition = newAdjustedPosition;
         attempts++;
       }
       
       setCloudPositions(prev => ({
         ...prev,
-        [id]: adjustedPosition
+        [id]: currentPosition
       }))
     }
   }
