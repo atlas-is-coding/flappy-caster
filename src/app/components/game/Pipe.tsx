@@ -11,7 +11,7 @@ type PipeProps = {
   gameHeight: number
 }
 
-const Pipe = ({ x, topHeight, bottomHeight, width, gap, gameHeight }: PipeProps) => {
+const Pipe = ({ x, topHeight, bottomHeight, width, gap }: PipeProps) => {
   const pipeRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {

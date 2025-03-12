@@ -47,7 +47,6 @@ const Game = () => {
   const pipeIdRef = useRef(0)
   const lastPipeSpawnTimeRef = useRef(0)
   const { score, bestScore, resetScore, incrementScore } = useScore()
-  const [showCollisions, setShowCollisions] = useState(true)
 
   useEffect(() => {
     const handleResize = () => {
@@ -208,7 +207,7 @@ const Game = () => {
     checkCollisions(birdRect, pipeRects, gameSize)
   }, [gameState, bird, pipes, hasJumped, createPipe, incrementScore, checkCollisions, gameSize])
 
-  const { actualFps } = useGameLoop({
+  useGameLoop({
     isRunning: gameState === 'playing',
     onUpdate: updateGame
   })
@@ -248,10 +247,6 @@ const Game = () => {
   const handleStartGame = () => {
     resetGame()
     setGameState('playing')
-  }
-
-  const toggleCollisions = () => {
-    setShowCollisions(prev => !prev)
   }
 
   return (

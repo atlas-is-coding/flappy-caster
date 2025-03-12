@@ -12,7 +12,7 @@ type BirdProps = {
   isGameStarted: boolean
 }
 
-const Bird = ({ x, y, width, height, rotation, isGameStarted }: BirdProps) => {
+const Bird = ({ x, y, width, height, rotation }: BirdProps) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const birdRef = useRef<HTMLDivElement>(null)
 
