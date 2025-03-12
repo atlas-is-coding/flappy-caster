@@ -1,7 +1,7 @@
 'use client'
 
 import React, { ElementType } from 'react'
-import { FontFamily, getFontClass, getFontStyle } from '../fonts'
+import { FontFamily, getFontClass, getFontStyle } from '../../fonts'
 
 type FontTextProps<T extends ElementType = 'span'> = {
   font: FontFamily

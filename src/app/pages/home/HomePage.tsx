@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import Header from '../../components/Header'
-import ParallaxClouds from '../../components/ParallaxClouds'
-import AnimatedBird from '../../components/AnimatedBird'
+import Header from '../../components/home/Header'
+import ParallaxClouds from '../../components/home/ParallaxClouds'
+import AnimatedBird from '../../components/home/AnimatedBird'
 
 const HomePage = () => {
   return (

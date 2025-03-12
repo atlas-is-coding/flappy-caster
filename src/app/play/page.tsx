@@ -1,20 +1,7 @@
 'use client'
 
-import Link from 'next/link'
+import PlayPage from '../pages/play/PlayPage'
 
-export default function PlayPage() {
-  return (
-    <div className="min-h-screen bg-blue-600 flex flex-col items-center justify-center">
-      <h1 className="text-6xl font-bold text-white mb-8 font-jersey-direct">Play page</h1>
-      <p className="text-xl text-white mb-8 font-jetbrains">Flappy soon...</p>
-      <Link 
-        href="/"
-        className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 font-jersey-direct text-2xl"
-        tabIndex={0}
-        aria-label="Back"
-      >
-        Back
-      </Link>
-    </div>
-  )
+export default function Play() {
+  return <PlayPage />
 } 
